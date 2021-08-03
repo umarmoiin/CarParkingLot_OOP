@@ -19,14 +19,14 @@
 # Defining the Car class
 class Car:
 
-    # You can think of the __init__ function as the class instructor.
-    # When we create an instance of this class we will need to add the license plate, model and color.
+    # You can think of the __init__ function as the class Constructor.
+    # Whenever we create an instance of this class we will need to add the license plate, model and color.
     def __init__(self, license_plate, model, color):
         self.license_plate = license_plate
         self.model = model
         self.color = color
 
-    # this dunder method returns the license plate, model and color whenever we print an instance of th clas to the console
+    # this dunder method returns the license plate, model and color whenever we print an instance of the class to the console
     def __repr__(self):
         return f'{self.license_plate}, {self.model}, {self.color}'
 
@@ -34,7 +34,7 @@ class Car:
 # Defining the Garage class
 class Garage:
 
-    # Class instructor with four attributes (cars_added, spots, car_info, bill)
+    # Class Constructor with four attributes (cars_added, spots, car_info, bill)
     def __init__(self):
         self.cars_added = []
         self.spots = 20
@@ -65,7 +65,8 @@ class Garage:
             # subtract one from self.spots because we have one less spot available
             self.spots -= 1
 
-            # Here we modify the attribute car_info that we created before and we create the keys 'code', 'license plate', 'model', 'color'
+            # Here we modify the dict attribute car_info that we created before and we create the keys 'code', 'license plate', 'model', 'color'
+            # and we put lists as the values of the dictionary
             self.car_info = {'code': [], 'license plate': [], 'Model': [], 'Color': []}
 
             # we loop through the cars_added list to access all the cars on the parking lot
@@ -84,25 +85,25 @@ class Garage:
 
 
     # this function removes the car from the parking lot
-    # it takes two inputs arguments: the code that was assigned to your car and the time that you had your car parked in hours
+    # it takes two inputs parameters: the code that was assigned to your car and the time that you had your car parked in hours
     def remove_car(self, given_code, bill_hours):
 
         # here we check how many codes we have in the car_info dict, we want to see how many cars are currently parked
         past_len = len(self.car_info['code'])
 
-        # if the code passed to the function is not stored in out car_info dictionary
+        # if the code passed to the function is not stored in our car_info dictionary
         if given_code not in self.car_info['code']:
             print("We could not find your car. Are you sure you parked your car here? ")
 
         else:
-            # if the given_code is in the dictionary then we loop through every code on our dictionary till we find it and its index
+            # if the given_code is in the dictionary then we loop through every code on our dictionary till we find it the matching code and its index
             for index, value in enumerate(self.car_info['code']):
                 if value == given_code:
 
                     # using the index then we can find all the car's information
                     print("Your car's license plate is:", self.car_info['license plate'][index])
-                    print("Your car's model is:", self.car_info['license plate'][index])
-                    print("Your car's color is :", self.car_info['license plate'][index])
+                    print("Your car's model is:", self.car_info['Model'][index])
+                    print("Your car's color is :", self.car_info['Color'][index])
 
                     # here we remove all the information about the car using .pop(index)
                     # and we store the code from the removed car on the removed_car_index variable
@@ -111,7 +112,7 @@ class Garage:
                     self.car_info['Model'].pop(index)
                     self.car_info['Color'].pop(index)
 
-                    # once the car is successfully removed we add one to self.spots because we have one more spot available
+                    # once the car is successfully removed, we add one to self.spots because we have one more spot available
                     self.spots += 1
 
         # since we removed a car the amount of cars prior to removal must be greater than the current amount of cars
@@ -132,12 +133,12 @@ class Garage:
                 # we ask the customer to enter the amount of hours until the input is numeric
                 bill_hours = input("Enter for how long you were on the parking lot in hours or 'q' to quit. Example input: 5  -->  ")
 
-                # the customer can input 'q' or 'Q' to break out ot the while loop
+                # the customer can input 'q' or 'Q' to break out of the while loop
                 if bill_hours in ['q', 'Q']:
                     break
 
             # With the list containing the bill hours and the code from the removed car now we can bill the customer
-            # if the bill_hours (first element on list) is less than 20, the customer will not be charged the $100 fine
+            # if the bill_hours (first element on list) is less than 20, the customer will not be charged the extra $100 fine
             if int(list_of_time_and_code[0]) < 20:
                 self.bill = int(list_of_time_and_code[0]) * 5
                 return f'Your total bill is ${self.bill}'
