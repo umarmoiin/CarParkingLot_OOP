@@ -69,8 +69,8 @@ class Garage:
             for index, value in enumerate(self.car_info['code']):
                 if value == given_code:
                     print("Your car's license plate is:", self.car_info['license plate'][index])
-                    print("Your car's model is:", self.car_info['license plate'][index])
-                    print("Your car's color is :", self.car_info['license plate'][index])
+                    print("Your car's model is:", self.car_info['Model'][index])
+                    print("Your car's color is :", self.car_info['Color'][index])
 
                     removed_car_index = self.car_info['code'].pop(index)
                     self.car_info['license plate'].pop(index)
